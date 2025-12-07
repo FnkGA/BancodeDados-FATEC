@@ -20,7 +20,10 @@ fileUploadArea.addEventListener('drop', (e) => {
     fileUploadArea.style.backgroundColor = '#0a0a0a';
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-        fileInput.files = files;
+        // Use DataTransfer to create a new FileList (files property is read-only)
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(files[0]);
+        fileInput.files = dataTransfer.files;
         updateFileUploadText(files[0].name);
     }
 });
